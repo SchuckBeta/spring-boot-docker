@@ -1,0 +1,50 @@
+# 以Centos7作为基础镜像
+FROM centos:7
+ 
+# 在不知道该如何安装jdk时可以启用下面这行命令，然后就直接运行：docker build
+#RUN yum search java | grep jdk
+ 
+# 选择适合的jdk版本安装
+RUN yum install -y java-1.7.0-openjdk.x86_64
+ 
+# 在根目录下创建一个名为web的目录
+RUN mkdir /web/
+ 
+# 设置工作目录为/web，设置之后可以使用：RUN pwd来查看当前的路径
+WORKDIR /web/
+ 
+# 安装wget以方便下载tomcat
+RUN yum install -y wget
+ 
+# 下载tomcat压缩文件
+RUN wget http://mirrors.hust.edu.cn/apache/tomcat/tomcat-6/v6.0.48/bin/apache-tomcat-6.0.48.tar.gz
+ 
+# 解压tomcat文件
+RUN tar zxvf apache-tomcat-6.0.48.tar.gz
+ 
+# 设置工具目录
+WORKDIR /web/apache-tomcat-6.0.48/webapps/ROOT/
+ 
+# 查看当前目录下的所有文件（夹），这时会有tomcat自带的一些文件
+RUN ls -l
+ 
+# 删除当前目录下的所有文件（夹）
+RUN rm -rf *
+ 
+# 删除后再列表，这时没有任何文件
+RUN ls -l
+ 
+# 将WebRoot目录下的所有文件（夹）复制到当前目录即（webapps/ROOT），这里也可以使用COPY指令
+ADD WebRoot .
+ 
+# 复制完成后可以再列表看一下是否复制成功
+RUN ls -l
+ 
+# 设置工作目录到tomcat的bin目录下，以方便启动tomcat服务
+WORKDIR /web/apache-tomcat-6.0.48/bin/
+ 
+# 对外暴露tomcat的8080端口
+EXPOSE 8080
+ 
+# 启动tomcat服务，这样启动不会在docker run时被覆盖
+ENTRYPOINT ["./catalina.sh", "run"]
