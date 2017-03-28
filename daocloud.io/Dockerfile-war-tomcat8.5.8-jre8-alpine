@@ -1,0 +1,16 @@
+###############################################################################################################################
+#应用根目录执行如下命令，构建 Docker 镜像
+#	sudo docker build -t docker-demo-spring-boot .
+#
+#运行镜像
+#	sudo docker run -d -p 8080:8080 docker-demo-spring-boot
+#
+#打开浏览器，或者使用 curl 访问如下地址,将会看到 Hello! Docker!  文字。
+#	http://127.0.0.1:8080
+#
+###############################################################################################################################
+
+FROM daocloud.io/tomcat:8.5.8-jre8-alpine
+
+EXPOSE 8080/tcp
+Add target/spring-boot-docker-0.0.1-SNAPSHOT.war  /usr/local/tomcat/webapps/ROOT.war

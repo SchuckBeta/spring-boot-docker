@@ -1,0 +1,41 @@
+###############################################################################################################################
+#构建镜像
+#	sudo docker build -t <your username>/redis .
+#
+#运行镜像
+#	sudo docker run -name redis -d <your username>/redis
+#
+#使用-link参数来创建一个连接redis容器，我们使用别名db,这将会在redis容器和redis实例容器中创建一个安全的通信隧道
+#	sudo docker run -link redis:db -i -t ubuntu:12.10 /bin/bash
+#
+#进入我们刚才创建的容器，我们需要安装redis的redis-cli的二进制包来测试连接
+#	apt-get update
+#   apt-get -y install redis-server
+#   service redis-server stop
+#
+#查看下web应用程序容器的环境变量，我们可以用我们的ip和端口来连接redis容器
+#	env
+#	    . . .
+#	    DB_NAME=/violet_wolf/db
+#	    DB_PORT_6379_TCP_PORT=6379
+#	    DB_PORT=tcp://172.17.0.33:6379
+#	    DB_PORT_6379_TCP=tcp://172.17.0.33:6379
+#	    DB_PORT_6379_TCP_ADDR=172.17.0.33
+#	    DB_PORT_6379_TCP_PROTO=tcp
+#
+#我们可以看到我们有一个DB为前缀的环境变量列表，DB来自指定别名连接我们的现在的容器，让我们使用DB_PORT_6379_TCP_ADDR变量连接到Redis容器。
+#	redis-cli -h $DB_PORT_6379_TCP_ADDR
+#   redis 172.17.0.33:6379>
+#   redis 172.17.0.33:6379> set docker awesome
+#   OK
+#   redis 172.17.0.33:6379> get docker
+#   "awesome"
+#   redis 172.17.0.33:6379> exit
+#
+###############################################################################################################################
+
+FROM        ubuntu:12.10
+RUN         apt-get update
+RUN         apt-get -y install redis-server
+EXPOSE      6379
+ENTRYPOINT  ["/usr/bin/redis-server"]
