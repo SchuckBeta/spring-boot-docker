@@ -1,0 +1,35 @@
+###############################################################################################################################
+#应用根目录执行如下命令，构建 Docker 镜像
+#	sudo docker build -t spring-boot-docker-jar .
+#
+#运行镜像
+#	sudo docker run -d -p 8080:8080 spring-boot-docker-jar
+#
+#打开浏览器，或者使用 curl 访问如下地址,将会看到 Hello! Docker!  文字。
+#	http://127.0.0.1:8080
+#
+###############################################################################################################################
+
+
+FROM daocloud.io/maven:3.3.3
+
+#ADD pom.xml /tmp/build/
+#RUN cd /tmp/build
+#RUN cd /tmp/build && mvn -q dependency:resolve
+
+
+#ADD src /tmp/build/src
+        #构建应用
+#RUN cd /tmp/build && mvn -q -DskipTests=true package \
+        #拷贝编译结果到指定目录
+#        && mv target/*.jar /app.jar \
+        #清理编译痕迹
+#        && cd / && rm -rf /tmp/build
+		
+
+
+VOLUME /tmp
+ADD spring-boot-docker-0.0.1-SNAPSHOT.jar app.jar
+RUN sh -c 'touch /app.jar'
+EXPOSE 8080
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
