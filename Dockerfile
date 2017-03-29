@@ -8,19 +8,26 @@ RUN cd /tmp/build && mvn -q dependency:resolve
 ADD src /tmp/build/src
         #构建应用
 RUN cd /tmp/build \
-	#列出目录文件 
+	# 列出目录文件
+	&& echo '列出目录文件' \
 	&& ls \
 	#执行打包命令
+	&& echo '执行打包命令' \
 	&& mvn -q -DskipTests=true package \
         #列出目录文件	
+	&& echo '列出目录文件' \
 	&& ls \
         #拷贝编译结果到指定目录
-        && mv target/*.jar /app.jar \
+	&& echo '拷贝编译结果到指定目录' \
+        && mv ./target/*.jar /app.jar \
         #列出目录文件	
+	&& echo '列出目录文件' \
 	&& ls \
 	#清理编译痕迹
+	&& echo '理编译痕迹' \
         && cd / && rm -rf /tmp/build \
 	#列出目录文件	
+	&& echo '列出目录文件' \
 	&& ls
 		
 #RUN cd /target
