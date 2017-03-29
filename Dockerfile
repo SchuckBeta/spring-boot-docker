@@ -13,7 +13,7 @@ RUN cd /tmp/build && mvn -q -DskipTests=true package \
         #清理编译痕迹
         && cd / && rm -rf /tmp/build
 		
-RUN cd /target
+#RUN cd /target
 #############################################################################
 
 VOLUME /tmp
