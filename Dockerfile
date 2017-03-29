@@ -12,6 +12,8 @@ RUN cd /tmp/build \
 	&& ls \
 	#执行打包命令
 	&& mvn -q -DskipTests=true package \
+        #列出目录文件	
+	&& ls \
         #拷贝编译结果到指定目录
         && mv target/*.jar /app.jar \
         #列出目录文件	
