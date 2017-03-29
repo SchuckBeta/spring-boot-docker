@@ -1,11 +1,10 @@
 FROM daocloud.io/maven:3.3.3
 
-#ADD pom.xml /tmp/build/
-#RUN cd /tmp/build
-#RUN cd /tmp/build && mvn -q dependency:resolve
-
-
 #############################################################################
+ADD pom.xml /tmp/build/
+RUN cd /tmp/build
+RUN cd /tmp/build && mvn -q dependency:resolve
+
 ADD src /tmp/build/src
         #构建应用
 RUN cd /tmp/build && mvn -q -DskipTests=true package \
