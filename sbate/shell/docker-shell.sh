@@ -97,11 +97,24 @@
 #	sudo docker images	
 #	sudo docker images -a
 #	执行结果如下：
-#		仓库镜像名                         标记版本            镜像唯一标识        创建时间            大小
-#		REPOSITORY                         TAG                 IMAGE ID            CREATED             SIZE
-#		registry                           latest              047218491f8c        3 weeks ago         33.2 MB
-#		hello-world                        latest              48b5124b2768        2 months ago        1.84 kB
-#		127.0.0.1:5000/sbeta/hello-world   latest              48b5124b2768        2 months ago        1.84 kB
+#		仓库镜像名                         标记版本            镜像唯一标识        创建时间            大小				名称
+#		REPOSITORY                         TAG                 IMAGE ID            CREATED             SIZE				NAMES
+#		registry                           latest              047218491f8c        3 weeks ago         33.2 MB			regy
+#		hello-world                        latest              48b5124b2768        2 months ago        1.84 kB			hw
+#		127.0.0.1:5000/sbeta/hello-world   latest              48b5124b2768        2 months ago        1.84 kB			hw127
+#
+#
+#操作容器：
+#	操作运行中容器：
+#		docker attach regy
+#			docker attach可以attach到一个已经运行的容器的stdin，然后进行命令执行的动作。但是需要注意的是，如果从这个stdin中exit，会导致容器的停止。 
+#	操作容器：
+#		docker exec -i regy /bin/sh
+#			只用-i时，由于没有分配伪终端，看起来像pipe执行一样。但是执行结果、命令返回值都可以正确获取。 
+#		docker exec -it regy /bin/sh
+#			使用-it时，则和我们平常操作console界面类似。而且也不会像attach方式因为退出，导致整个容器退出。这种方式可以替代ssh或者nsenter、nsinit方式，在容器内进行操作。 
+#		docker exec -t bb2 /bin/sh
+#			如果只使用-t参数，则可以看到一个console窗口，但是执行命令会发现由于没有获得stdin的输出，无法看到命令执行情况。
 #
 #
 #推送镜像到私库
