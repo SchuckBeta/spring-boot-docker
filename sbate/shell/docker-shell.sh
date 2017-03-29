@@ -43,6 +43,15 @@
 #	
 #
 #运行镜像
+#	docker run <相关参数> <镜像 ID> <初始命令>
+#		-i：表示以“交互模式”运行容器
+#		-t：表示容器启动后会进入其命令行
+#		-v：表示需要将本地哪个目录挂载到容器中，
+#			格式：-v <宿主机目录>:<容器目录>
+#	切换模式：	
+#		可以使用指定的镜像运行一个shell，如果想退出该终端，可以使用exit命令，
+#		或者依次按下CTRL -p+CTRL -q，即可切换到宿主机器。不过这种方式，容器依然在后天运行。
+#
 #	指定端口映射：-p
 #		sudo docker run -p 8080:8080 hello-world
 #	指定镜像：-t
@@ -54,7 +63,7 @@
 #		sudo docker run -d -v /opt/registry:/var/lib/registry -p 5000:5000 --restart=always --name registry registry
 #	设置容器名称：--name 
 #		sudo docker run -d -v /opt/registry:/var/lib/registry -p 5000:5000 --restart=always --name registry registry
-#	指定文件本地存储：-v
+#	指定文件本地存储：-v（挂载到本地）
 #		sudo docker run -d -v /opt/registry:/var/lib/registry -p 5000:5000 --restart=always --name registry registry
 #
 #
