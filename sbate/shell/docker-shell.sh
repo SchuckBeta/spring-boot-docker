@@ -3,6 +3,11 @@
 ################################################ Docker常用命令 ################################################
 #博客：http://www.cnblogs.com/lienhua34/p/4922130.html
 #
+#	centos yum install netstat
+#	centos yum install net-tools
+#	apt-get install netstat
+#
+#
 #设置远程仓库：(保存在 vim /etc/default/docker)
 #	daocloud仓库：
 #		sudo echo “DOCKER_OPTS=\”\$DOCKER_OPTS –registry-mirror=http://your-id.m.daocloud.io -d\”” >> /etc/default/docker
@@ -109,6 +114,7 @@
 #		docker attach regy
 #			docker attach可以attach到一个已经运行的容器的stdin，然后进行命令执行的动作。但是需要注意的是，如果从这个stdin中exit，会导致容器的停止。 
 #	操作容器：
+#		docker exec -it regy /bin/bassh
 #		docker exec -i regy /bin/sh
 #			只用-i时，由于没有分配伪终端，看起来像pipe执行一样。但是执行结果、命令返回值都可以正确获取。 
 #		docker exec -it regy /bin/sh
