@@ -170,11 +170,14 @@
 #
 # docker 运行Kubernetes
 #   运行Etcd
-#     docker run --net=host -d gcr.io/google_containers/etcd:2.0.12 /user/local/bin/etcd
+#     docker pull docker.io/elcolio/etcd:2.0.5
+#     docker run --net=host -d docker.io/elcolio/etcd:2.0.5 /user/local/bin/etcd
+#
 #   运行Etcd(google)
+#     docker pull gcr.io/google_containers/etcd:2.0.12
 #     docker run --net=host -d gcr.io/google_containers/etcd:2.0.12 /user/local/bin/etcd
 #
-#   docker 运行Kubernetes
+#   docker 运行Kubernetes 
 #     docker pull daocloud.io/frostmourner/hyperkube:master-f27425e
 #     docker run -d --net=host --privileged daocloud.io/frostmourner/hyperkube:master-f27425e /hyperkub
 #   docker 运行Kubernetes(google)
