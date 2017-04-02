@@ -114,7 +114,7 @@
 #		docker attach regy
 #			docker attach可以attach到一个已经运行的容器的stdin，然后进行命令执行的动作。但是需要注意的是，如果从这个stdin中exit，会导致容器的停止。 
 #	操作容器：
-#		docker exec -it regy /bin/bassh
+#		docker exec -it regy /bin/bash
 #		docker exec -i regy /bin/sh
 #			只用-i时，由于没有分配伪终端，看起来像pipe执行一样。但是执行结果、命令返回值都可以正确获取。 
 #		docker exec -it regy /bin/sh
