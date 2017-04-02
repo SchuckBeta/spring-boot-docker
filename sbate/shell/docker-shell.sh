@@ -6,7 +6,7 @@
 #	centos yum install netstat
 #	centos yum install net-tools
 #	apt-get install netstat
-#
+# curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://5e4f142b.m.daocloud.io
 #
 #设置远程仓库：(保存在 vim /etc/default/docker)
 #	daocloud仓库：
@@ -166,5 +166,21 @@
 #		DOCKER_OPTS="--insecure-registry xxx.xxx.xxx.xxx:5000"
 #		然后重启docker后台进程，
 #		sudo service docker restart
+#
+#
+# docker 运行Kubernetes
+#   运行Etcd
+#     docker run --net=host -d gcr.io/google_containers/etcd:2.0.12 /user/local/bin/etcd
+#   运行Etcd(google)
+#     docker run --net=host -d gcr.io/google_containers/etcd:2.0.12 /user/local/bin/etcd
+#
+#   docker 运行Kubernetes
+#     docker pull daocloud.io/frostmourner/hyperkube:master-f27425e
+#     docker run -d --net=host --privileged daocloud.io/frostmourner/hyperkube:master-f27425e /hyperkub
+#   docker 运行Kubernetes(google)
+#     docker pull gcr.io/google_containers/hyperkube
+#     docker run -d --net=host --privileged gcr.io/google_containers/hyperkube /hyperkub
+#
+#
 #
 
